@@ -14,8 +14,7 @@ class Menu(object):
         self.childs = childs or []
         self.separator = separator
         self._url = url
-        for k, v in options.iteritems():
-            setattr(self, k, v)
+        self.options = options
 
     def url(self, **kwargs):
         if self._url:
@@ -39,9 +38,6 @@ class Menu(object):
                (not self.login_required and current_app.features.users.logged_in()):
                 return False
         return True
-
-    def __getattr__(self, name):
-        return None
 
     def __iter__(self):
         return iter(self.childs)
